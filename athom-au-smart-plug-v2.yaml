@@ -199,6 +199,10 @@ button:
     name: "Safe Mode"
     internal: false
     entity_category: config
+    
+   - platform: gpio
+    name: "Power Button"
+    entity_category: config
 
 switch:
   - platform: gpio
