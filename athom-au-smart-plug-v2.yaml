@@ -57,7 +57,7 @@ wifi:
 captive_portal:
 
 dashboard_import:
-  package_import_url: github://MasterCATZ/athom-configs/athom-au-smart-plug-v2.yaml
+  package_import_url: github://MasterCATZ/athom-configs/athom-smart-plug-v2.yaml
 
 uart:
   rx_pin: RX
@@ -198,10 +198,7 @@ button:
   - platform: safe_mode
     name: "Safe Mode"
     internal: false
-    entity_category: config    
-#   - platform: gpio
-#    name: "Power Button"
-#    entity_category: config
+    entity_category: config
 
 switch:
   - platform: gpio
