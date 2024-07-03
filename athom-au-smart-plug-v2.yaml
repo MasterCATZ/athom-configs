@@ -38,7 +38,9 @@ preferences:
 
 api:
 
-ota:
+ota: 
+  - password: !secret ota_password
+    platform: esphome
 
 logger:
   baud_rate: 0
