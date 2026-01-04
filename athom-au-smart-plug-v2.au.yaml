@@ -9,7 +9,7 @@ substitutions:
   sensor_update_interval: "10s"
   relay_restore_mode: RESTORE_DEFAULT_ON
   # Current Limit in Amps. AU Plug = 10. IL, BR, EU, UK, US Plug = 16.
-  current_limit : "10"
+  current_limit : "16"
   # Define a domain for this device to use. i.e. iot.home.lan (so device will appear as athom-smart-plug-v2.iot.home.lan in DNS/DHCP logs)
   dns_domain: ".local"
   # Set timezone of the smart plug. Useful if the plug is in a location different to the HA server. Can be entered in unix Country/Area format (i.e. "Australia/Sydney")
@@ -111,13 +111,12 @@ mdns:
 captive_portal:
 
 dashboard_import:
-  #package_import_url: github://athom-tech/athom-configs/athom-smart-plug-v2.yaml
-  package_import_url: https://github.com/MasterCATZ/athom-configs/tree/MasterCATZ-energy.stats/athom-au-smart-plug-v2.au.yaml
+  package_import_url: github://athom-tech/athom-configs/athom-smart-plug-v2.yaml
 
-  #Dentra Components - Adds 'Platform - Energy Statistics'
-  #https://github.com/dentra/esphome-components/tree/master/components/energy_statistics
-  #external_components:
-  #  - source: github://dentra/esphome-components
+# Dentra Components - Adds 'Platform - Energy Statistics'
+# https://github.com/dentra/esphome-components/tree/master/components/energy_statistics
+# external_components:
+#   - source: github://dentra/esphome-components
 
 uart:
   rx_pin: RX
@@ -132,7 +131,7 @@ globals:
   - id: restore_mode
     type: int
     restore_value: yes
-    initial_value: "1"      # 0 = Always_Off. 1 = Restore_Power_Off. 2 = Always_On.
+    initial_value: "2"      # 0 = Always_Off. 1 = Restore_Power_Off. 2 = Always_On.
 
 select:
   - platform: template
@@ -287,37 +286,37 @@ sensor:
     filters:
       - multiply: 0.001
 
-      # Dentra Components - Define the id of the sensor providing 'Total Energy' used
-   - platform: "energy_statistics"
-     total: total_energy_sensor
+  #    # Dentra Components - Define the id of the sensor providing 'Total Energy' used
+  # - platform: "energy_statistics"
+  #   total: total_energy_sensor
 
-      # Dentra Components - Adds Energy Today. Persistents if restarted, unlike 'total_daily_energy'
-     energy_today:
-       name: "Energy Today"
-       id: total_energy_today
-       accuracy_decimals: 3
-       icon: mdi:hours-24
+  #    # Dentra Components - Adds Energy Today. Persistents if restarted, unlike 'total_daily_energy'
+  #   energy_today:
+  #     name: "Energy Today"
+  #     id: total_energy_today
+  #     accuracy_decimals: 3
+  #     icon: mdi:hours-24
 
-      # Dentra Components - Adds Energy Yesterday
-     energy_yesterday:
-       name: "Total Energy Yesterday"
-       id: total_energy_yesterday
-       icon: mdi:calendar-today
-       accuracy_decimals: 3
+  #    # Dentra Components - Adds Energy Yesterday
+  #   energy_yesterday:
+  #     name: "Total Energy Yesterday"
+  #     id: total_energy_yesterday
+  #     icon: mdi:calendar-today
+  #     accuracy_decimals: 3
 
-      # Dentra Components - Adds Energy Week
-     energy_week:
-       name: "Total Energy Week"
-       id: total_energy_week
-       icon: mdi:calendar-week
-       accuracy_decimals: 3
+  #    # Dentra Components - Adds Energy Week
+  #   energy_week:
+  #     name: "Total Energy Week"
+  #     id: total_energy_week
+  #     icon: mdi:calendar-week
+  #     accuracy_decimals: 3
 
-      # Dentra Components - Adds Energy Month
-     energy_month:
-       name: "Total Energy Month"
-       id: total_energy_month
-       accuracy_decimals: 3
-       icon: mdi:calendar-month
+  #    # Dentra Components - Adds Energy Month
+  #   energy_month:
+  #     name: "Total Energy Month"
+  #     id: total_energy_month
+  #     accuracy_decimals: 3
+  #     icon: mdi:calendar-month
 
 button:
   - platform: restart
