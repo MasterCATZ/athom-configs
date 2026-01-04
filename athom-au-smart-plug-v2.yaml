@@ -111,7 +111,8 @@ mdns:
 captive_portal:
 
 dashboard_import:
-  package_import_url: github://athom-tech/athom-configs/athom-smart-plug-v2.yaml
+  #package_import_url: github://athom-tech/athom-configs/athom-smart-plug-v2.yaml
+  package_import_url: github://MasterCATZ/athom-configs/athom-smart-plug-v2.yaml
   #package_import_url: https://github.com/MasterCATZ/athom-configs/tree/MasterCATZ-energy.stats/athom-au-smart-plug-v2.yaml
 
 # Dentra Components - Adds 'Platform - Energy Statistics'
