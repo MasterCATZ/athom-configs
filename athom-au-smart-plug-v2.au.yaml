@@ -114,10 +114,10 @@ dashboard_import:
 #  package_import_url: github://athom-tech/athom-configs/athom-smart-plug-v2.yaml
   package_import_url: https://github.com/MasterCATZ/athom-configs/tree/MasterCATZ-energy.stats/athom-au-smart-plug-v2.au.yaml
 
-  Dentra Components - Adds 'Platform - Energy Statistics'
-  https://github.com/dentra/esphome-components/tree/master/components/energy_statistics
-  external_components:
-    - source: github://dentra/esphome-components
+  #Dentra Components - Adds 'Platform - Energy Statistics'
+  #https://github.com/dentra/esphome-components/tree/master/components/energy_statistics
+  #external_components:
+  #  - source: github://dentra/esphome-components
 
 uart:
   rx_pin: RX
