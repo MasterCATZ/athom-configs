@@ -9,11 +9,11 @@ substitutions:
   sensor_update_interval: "10s"
   relay_restore_mode: RESTORE_DEFAULT_ON
   # Current Limit in Amps. AU Plug = 10. IL, BR, EU, UK, US Plug = 16.
-  current_limit : "16"
+  current_limit : "10"
   # Define a domain for this device to use. i.e. iot.home.lan (so device will appear as athom-smart-plug-v2.iot.home.lan in DNS/DHCP logs)
   dns_domain: ".local"
   # Set timezone of the smart plug. Useful if the plug is in a location different to the HA server. Can be entered in unix Country/Area format (i.e. "Australia/Sydney")
-  timezone: ""
+  timezone: "Australia/Brisbane"
   # Set the duration between the sntp service polling ntp.org servers for an update
   sntp_update_interval: "6h"
   # Network time servers for your region, enter from lowest to highest priority. To use local servers update as per zones or countries at: https://www.ntppool.org/zone/@
@@ -21,7 +21,7 @@ substitutions:
   sntp_server_2: "1.pool.ntp.org"
   sntp_server_3: "2.pool.ntp.org"  
   # Enables faster network connections, with last connected SSID being connected to and no full scan for SSID being undertaken
-  wifi_fast_connect: "false"
+  wifi_fast_connect: "true"
   # Define logging level: NONE, ERROR, WARN, INFO, DEBUG (Default), VERBOSE, VERY_VERBOSE
   log_level: "INFO"
   # Enable or disable the use of IPv6 networking on the device
@@ -31,7 +31,7 @@ substitutions:
   # Specifies whether pins should be initialised as early as possible to known values. Recommended value is false where switches are involved, as these will toggle when updating the firmware or when restarting the device. Defaults to true.
   early_pin_init: "true"
   # Power plug icon selection. Change to reflect the type/country of powr plug in use, this will update the power plug icon shown next to the switch
-  power_plug_type: "power-socket-us"  # Options: power-socket-au | power-socket-ch | power-socket-de | power-socket-eu | power-socket-fr | power-socket-it | power-socket-jp | power-socket-uk | power-socket-us |
+  power_plug_type: "power-socket-au"  # Options: power-socket-au | power-socket-ch | power-socket-de | power-socket-eu | power-socket-fr | power-socket-it | power-socket-jp | power-socket-uk | power-socket-us |
 
 
 ########################## End of Substitutions #########################
