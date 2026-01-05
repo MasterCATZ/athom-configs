@@ -348,7 +348,7 @@ light:
     name: "Status LED"
     id: blue_led
     icon: mdi:lightbulb-outline
-    disabled_by_default: true
+    disabled_by_default: false
     pin:
       inverted: true
       number: GPIO13
