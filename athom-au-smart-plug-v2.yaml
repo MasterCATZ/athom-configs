@@ -254,7 +254,7 @@ sensor:
         - throttle_average: ${sensor_update_interval}
 
     reactive_power:
-      name: "Reactive Power"
+      name: "Reactive Power / Volt-Amperes Reactive"
       icon: mdi:flash
       filters:
         - throttle_average: ${sensor_update_interval}
