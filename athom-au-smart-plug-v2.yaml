@@ -116,8 +116,9 @@ dashboard_import:
   
   # Dentra Components - Adds 'Platform - Energy Statistics'
   #  https://github.com/dentra/esphome-components/tree/master/components/energy_statistics
-  external_components:
+external_components:
   - source: github://dentra/esphome-components
+    refresh: 0s
   
 uart:
   rx_pin: RX
