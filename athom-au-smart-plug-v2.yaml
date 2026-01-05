@@ -118,6 +118,7 @@ dashboard_import:
   #  https://github.com/dentra/esphome-components/tree/master/components/energy_statistics
   external_components:
   - source: github://dentra/esphome-components
+  
 uart:
   rx_pin: RX
   baud_rate: 4800
@@ -240,8 +241,8 @@ sensor:
       on_value:
         then:
           - lambda: |-
-              static float previous_energy_value = 0.0;
-              float current_energy_value = id(energy).state;
+              ic float previous_energy_value = 0.0;
+              float current_energy_value = id(energy).e;
               id(total_energy) += current_energy_value - previous_energy_value;
               previous_energy_value = current_energy_value;
               id(total_energy_sensor).update();
@@ -287,7 +288,7 @@ sensor:
       - multiply: 0.001
       
   #    # Dentra Components - Define the id of the sensor providing 'Total Energy' used
-  - platform: "energy_statistics"
+  - platform: energy_statistics
     total: total_energy_sensor
 
       # Dentra Components - Adds Energy Today. Persistents if restarted, unlike 'total_daily_energy'
