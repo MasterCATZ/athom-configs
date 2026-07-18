@@ -10,7 +10,7 @@ substitutions:
   # Project Name
   project_name: "China Athom Technology.3Gang Switch"
   # Projection version denotes the release version of the yaml file, allowing checking of deployed vs latest version
-  project_version: "v1.1.4"
+  project_version: "v1.1.5"
   # Restore the relay (GPO switch) upon reboot to state:
   light1_restore_mode: RESTORE_DEFAULT_OFF
   light2_restore_mode: RESTORE_DEFAULT_OFF
@@ -38,7 +38,7 @@ esphome:
   comment: "${device_description}"
   area: "${room}"
   name_add_mac_suffix: true
-  min_version: 2024.6.0
+  min_version: 2026.6.0
   project:
     name: "${project_name}"
     version: "${project_version}"
@@ -84,6 +84,23 @@ api:
 
 ota:
   - platform: esphome
+  # Enables OTA firmware flashing from a URL (used by the update component below)
+  - platform: http_request
+
+# Required by the ota http_request platform and the update component.
+# verify_ssl: false skips TLS cert validation to reduce heap/RAM pressure during
+# the download; the manifest's MD5 still verifies firmware integrity before flashing.
+http_request:
+  verify_ssl: false
+
+update:
+  # Managed updates via HTTP request: periodically checks the published manifest
+  # and exposes a "Firmware Update" entity, pointing at this device's GitHub Pages
+  # manifest. Pages URLs avoid the redirect/buffer issues of Release download URLs.
+  - platform: http_request
+    name: "Firmware Update"
+    source: https://athom-tech.github.io/athom-configs/firmware/athom-sw03.manifest.json
+    # update_interval defaults to 6h (how often it checks, not installs)
 
 logger:
   level: ${log_level}
@@ -189,12 +206,6 @@ binary_sensor:
         - light.toggle: light3
 
 sensor:
-  - platform: uptime
-    name: "Uptime Sensor"
-    id: uptime_sensor
-    entity_category: diagnostic
-    internal: true
-
   - platform: wifi_signal
     name: "WiFi Signal dB"
     id: wifi_signal_db
@@ -331,29 +342,14 @@ text_sensor:
 #    device_class: timestamp
 
   #  Creates a sensor of the uptime of the device, in formatted days, hours, minutes and seconds
-  - platform: template
+  - platform: uptime
     name: "Uptime"
+    id: uptime_sensor
     entity_category: diagnostic
-    lambda: |-
-      int seconds = (id(uptime_sensor).state);
-      int days = seconds / (24 * 3600);
-      seconds = seconds % (24 * 3600);
-      int hours = seconds / 3600;
-      seconds = seconds % 3600;
-      int minutes = seconds /  60;
-      seconds = seconds % 60;
-      if ( days > 3650 ) {
-        return { "Starting up" };
-      } else if ( days ) {
-        return { (String(days) +"d " + String(hours) +"h " + String(minutes) +"m "+ String(seconds) +"s").c_str() };
-      } else if ( hours ) {
-        return { (String(hours) +"h " + String(minutes) +"m "+ String(seconds) +"s").c_str() };
-      } else if ( minutes ) {
-        return { (String(minutes) +"m "+ String(seconds) +"s").c_str() };
-      } else {
-        return { (String(seconds) +"s").c_str() };
-      }
     icon: mdi:clock-start
+    update_interval: 60s
+    format:
+      separator: " "
 
 time:
   - platform: sntp
