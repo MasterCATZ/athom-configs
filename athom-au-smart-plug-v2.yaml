@@ -21,7 +21,9 @@ substitutions:
   sntp_server_2: "1.pool.ntp.org"
   sntp_server_3: "2.pool.ntp.org"  
   # Enables faster network connections, with last connected SSID being connected to and no full scan for SSID being undertaken
-  wifi_fast_connect: "true"
+  # Set to false: fast_connect skips the full SSID scan and fails to reconnect when the
+  # AP changes channel / band-steers, causing dropouts. false = proper scan + reliable reconnect.
+  wifi_fast_connect: "false"
   # Define logging level: NONE, ERROR, WARN, INFO, DEBUG (Default), VERBOSE, VERY_VERBOSE
   log_level: "INFO"
   # Enable or disable the use of IPv6 networking on the device
@@ -42,7 +44,7 @@ esphome:
   comment: "${device_description}"
   area: "${room}"
   name_add_mac_suffix: true
-  min_version: 2024.6.0
+  min_version: 2026.6.0
   project:
     name: "${project_name}"
     version: "${project_version}"
